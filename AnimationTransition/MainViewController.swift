@@ -41,11 +41,11 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UIViewControllerTransitioningDelegate {
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresenterAnimator(forward: true)
+        return PresenterAnimator2DTransform(forward: true)
     }
     
     
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresenterAnimator(forward: false)
+        return PresenterAnimator2DTransform(forward: false)
     }
 }

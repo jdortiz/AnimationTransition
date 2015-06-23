@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF3F741F1B39948D005A30F0 /* PresenterAnimator2DTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3F741E1B39948D005A30F0 /* PresenterAnimator2DTransform.swift */; };
 		CFE1658A1B393B30006CEAE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE165891B393B30006CEAE6 /* AppDelegate.swift */; };
 		CFE1658C1B393B30006CEAE6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE1658B1B393B30006CEAE6 /* MainViewController.swift */; };
 		CFE1658F1B393B30006CEAE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE1658D1B393B30006CEAE6 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF3F741E1B39948D005A30F0 /* PresenterAnimator2DTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterAnimator2DTransform.swift; sourceTree = "<group>"; };
 		CFE165841B393B30006CEAE6 /* AnimationTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimationTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE165881B393B30006CEAE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFE165891B393B30006CEAE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF3F74201B3994A7005A30F0 /* AnimationTransitions */ = {
+			isa = PBXGroup;
+			children = (
+				CFE165A91B395209006CEAE6 /* PresenterAnimator2DFrame.swift */,
+				CF3F741E1B39948D005A30F0 /* PresenterAnimator2DTransform.swift */,
+			);
+			name = AnimationTransitions;
+			sourceTree = "<group>";
+		};
 		CFE1657B1B393B30006CEAE6 = {
 			isa = PBXGroup;
 			children = (
@@ -84,8 +95,8 @@
 				CFE1658D1B393B30006CEAE6 /* Main.storyboard */,
 				CFE165901B393B30006CEAE6 /* Images.xcassets */,
 				CFE165921B393B30006CEAE6 /* LaunchScreen.xib */,
+				CF3F74201B3994A7005A30F0 /* AnimationTransitions */,
 				CFE165871B393B30006CEAE6 /* Supporting Files */,
-				CFE165A91B395209006CEAE6 /* PresenterAnimator2DFrame.swift */,
 			);
 			path = AnimationTransition;
 			sourceTree = "<group>";
@@ -217,6 +228,7 @@
 			files = (
 				CFE165AA1B395209006CEAE6 /* PresenterAnimator2DFrame.swift in Sources */,
 				CFE1658C1B393B30006CEAE6 /* MainViewController.swift in Sources */,
+				CF3F741F1B39948D005A30F0 /* PresenterAnimator2DTransform.swift in Sources */,
 				CFE1658A1B393B30006CEAE6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +427,7 @@
 				CFE165A51B393B30006CEAE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CFE165A61B393B30006CEAE6 /* Build configuration list for PBXNativeTarget "AnimationTransitionTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +436,7 @@
 				CFE165A81B393B30006CEAE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

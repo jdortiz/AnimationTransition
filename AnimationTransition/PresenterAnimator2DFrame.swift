@@ -11,11 +11,8 @@ import UIKit
 import Darwin
 
 
-public class PresenterAnimator: NSObject {
+public class PresenterAnimator2DFrame: NSObject {
     let forward: Bool
-    let π = M_PI
-    let scaleFactor2DBackground = 0.8
-    let scaleFactor2DForeground = 0.9
     
     public init(forward: Bool) {
         self.forward = forward
@@ -23,8 +20,8 @@ public class PresenterAnimator: NSObject {
 }
 
 
-extension PresenterAnimator: UIViewControllerAnimatedTransitioning {
-    
+extension PresenterAnimator2DFrame: UIViewControllerAnimatedTransitioning {
+
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         if let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
             let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
@@ -40,8 +37,6 @@ extension PresenterAnimator: UIViewControllerAnimatedTransitioning {
 
 
     func animateTransitionForward(transitionContext: UIViewControllerContextTransitioning, fromViewController: UIViewController, toViewController: UIViewController, fromView: UIView, toView: UIView) {
-        let relativeDurationFirstPart = 0.4
-        let relativeDurationSecondPart = 1.0 - relativeDurationFirstPart
         let containerView = transitionContext.containerView()
         let endFrame = transitionContext.finalFrameForViewController(toViewController)
 
