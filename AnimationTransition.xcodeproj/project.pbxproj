@@ -13,6 +13,7 @@
 		CFE165911B393B30006CEAE6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFE165901B393B30006CEAE6 /* Images.xcassets */; };
 		CFE165941B393B30006CEAE6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFE165921B393B30006CEAE6 /* LaunchScreen.xib */; };
 		CFE165A01B393B30006CEAE6 /* AnimationTransitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE1659F1B393B30006CEAE6 /* AnimationTransitionTests.swift */; };
+		CFE165AA1B395209006CEAE6 /* PresenterAnimator2DFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE165A91B395209006CEAE6 /* PresenterAnimator2DFrame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		CFE165991B393B30006CEAE6 /* AnimationTransitionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimationTransitionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE1659E1B393B30006CEAE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFE1659F1B393B30006CEAE6 /* AnimationTransitionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTransitionTests.swift; sourceTree = "<group>"; };
+		CFE165A91B395209006CEAE6 /* PresenterAnimator2DFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterAnimator2DFrame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				CFE165901B393B30006CEAE6 /* Images.xcassets */,
 				CFE165921B393B30006CEAE6 /* LaunchScreen.xib */,
 				CFE165871B393B30006CEAE6 /* Supporting Files */,
+				CFE165A91B395209006CEAE6 /* PresenterAnimator2DFrame.swift */,
 			);
 			path = AnimationTransition;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFE165AA1B395209006CEAE6 /* PresenterAnimator2DFrame.swift in Sources */,
 				CFE1658C1B393B30006CEAE6 /* MainViewController.swift in Sources */,
 				CFE1658A1B393B30006CEAE6 /* AppDelegate.swift in Sources */,
 			);

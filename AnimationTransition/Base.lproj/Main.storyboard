@@ -29,7 +29,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IET-L4-Vfl" kind="presentation" id="fai-jD-f6z"/>
+                                    <segue destination="IET-L4-Vfl" kind="presentation" identifier="EditData" id="fai-jD-f6z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -77,12 +77,12 @@
                     <navigationItem key="navigationItem" id="cTG-Ia-JsJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="tLR-9u-pv2">
                             <connections>
-                                <segue destination="Z81-BI-01D" kind="unwind" identifier="SaveEditSegue" unwindAction="unwindSegueAction:" id="Wld-Wy-gB6"/>
+                                <segue destination="Z81-BI-01D" kind="unwind" identifier="SaveEdit" unwindAction="unwindSegueAction:" id="Wld-Wy-gB6"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="78l-OF-hJ5">
                             <connections>
-                                <segue destination="Z81-BI-01D" kind="unwind" identifier="CancelEditSegue" unwindAction="unwindSegueAction:" id="HHc-Lb-Mym"/>
+                                <segue destination="Z81-BI-01D" kind="unwind" identifier="CancelEdit" unwindAction="unwindSegueAction:" id="HHc-Lb-Mym"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
