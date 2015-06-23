@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Main VC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="AnimationTransition" customModuleProvider="target" sceneMemberID="viewController">
@@ -42,7 +42,7 @@
                             <constraint firstAttribute="centerX" secondItem="lnX-N9-5yp" secondAttribute="centerX" id="uhg-CC-cOU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kCI-75-tUL"/>
+                    <navigationItem key="navigationItem" title="Main VC" id="kCI-75-tUL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

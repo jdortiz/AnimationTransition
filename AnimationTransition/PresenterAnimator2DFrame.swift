@@ -94,6 +94,6 @@ extension PresenterAnimator2DFrame: UIViewControllerAnimatedTransitioning {
     
     
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 0.6
+        return 1.0
     }
 }
