@@ -43,37 +43,35 @@ extension PresenterAnimator2DTransform: UIViewControllerAnimatedTransitioning {
         toView.frame = endFrame
         
         if transitionContext.isAnimated() {
-            let relativeDurationFirstPart = 0.4
-            let relativeDurationSecondPart = 1.0 - relativeDurationFirstPart
+            let relativeDurationFirstAnimation = 0.4
+            let relativeDurationSecondAnimation = 1.0
             let containerView = transitionContext.containerView()
+            let screenFrame = UIScreen.mainScreen().bounds
+            toView.transform = CGAffineTransformTranslate(
+                CGAffineTransformScale(CGAffineTransformIdentity,
+                    CGFloat(scaleFactor2DForeground), CGFloat(scaleFactor2DForeground)),
+                0.0, screenFrame.size.height)
+            containerView.addSubview(toView)
             
-            UIView.animateWithDuration(relativeDurationFirstPart * transitionDuration(transitionContext),
+            UIView.animateKeyframesWithDuration(transitionDuration(transitionContext),
                 delay: 0.0,
-                /*            usingSpringWithDamping: 0.70,
-                initialSpringVelocity: 4.0,*/
-                options: UIViewAnimationOptions(0),
-                animations:{ [unowned self] in
-                    fromView.tintAdjustmentMode = .Dimmed
-                    fromView.transform = CGAffineTransformScale(CGAffineTransformIdentity,
-                        CGFloat(self.scaleFactor2DBackground), CGFloat(self.scaleFactor2DBackground))
-                }, completion: {[unowned self] (finished: Bool) in
-                    let screenFrame = UIScreen.mainScreen().bounds
-                    toView.transform = CGAffineTransformTranslate(
-                        CGAffineTransformScale(CGAffineTransformIdentity,
-                            CGFloat(self.scaleFactor2DForeground), CGFloat(self.scaleFactor2DForeground)),
-                        0.0, screenFrame.size.height)
-                    containerView.addSubview(toView)
-                    UIView.animateWithDuration(relativeDurationSecondPart * self.transitionDuration(transitionContext),
-                        delay: 0.0,
-                        /*                    usingSpringWithDamping: 0.70,
-                        initialSpringVelocity: 4.0,*/
-                        options: UIViewAnimationOptions(0),
-                        animations:{
-                            toView.transform = CGAffineTransformIdentity
-                        }, completion: { (finished: Bool) in
-                            transitionContext.completeTransition(true)
+                options: .CalculationModeCubic,
+                animations: {
+                    UIView.addKeyframeWithRelativeStartTime(0.0,
+                        relativeDuration: relativeDurationFirstAnimation,
+                        animations: {
+                            fromView.tintAdjustmentMode = .Dimmed
+                            fromView.transform = CGAffineTransformScale(CGAffineTransformIdentity,
+                                CGFloat(self.scaleFactor2DBackground), CGFloat(self.scaleFactor2DBackground))
                     })
-                })
+                    UIView.addKeyframeWithRelativeStartTime(0.0,
+                        relativeDuration: relativeDurationSecondAnimation,
+                        animations: {
+                            toView.transform = CGAffineTransformIdentity
+                    })
+                }, completion: { (finished: Bool) in
+                    transitionContext.completeTransition(true)
+            })
         } else {
             containerView.addSubview(toView)
         }
@@ -84,30 +82,34 @@ extension PresenterAnimator2DTransform: UIViewControllerAnimatedTransitioning {
         let containerView = transitionContext.containerView()
         
         if transitionContext.isAnimated() {
-            let containerView = transitionContext.containerView()
-            let endFrame: CGRect, startFrame: CGRect
-            let screenFrame = UIScreen.mainScreen().bounds
-            startFrame = transitionContext.initialFrameForViewController(fromViewController)
-            endFrame = CGRect(x: startFrame.origin.x, y: screenFrame.size.height, width: startFrame.size.width, height: startFrame.size.height)
-            toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
-            fromViewController.view.frame = startFrame
-            containerView.insertSubview(toViewController.view!, belowSubview:fromViewController.view!)
-            UIView.animateWithDuration(transitionDuration(transitionContext), animations:{
-                toViewController.view.tintAdjustmentMode = .Automatic
-                toViewController.view.transform = CGAffineTransformIdentity
-                fromViewController.view.frame = endFrame
+            toView.tintAdjustmentMode = .Dimmed
+            toView.transform = CGAffineTransformScale(CGAffineTransformIdentity,
+                CGFloat(scaleFactor2DBackground), CGFloat(scaleFactor2DBackground))
+            containerView.insertSubview(toView, belowSubview:fromView)
+            UIView.animateKeyframesWithDuration(transitionDuration(transitionContext),
+                delay: 0.0,
+                options: .CalculationModeCubic,
+                animations: {
+                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 1.0,
+                        animations: {
+                            fromView.transform = CGAffineTransformTranslate(
+                                CGAffineTransformScale(CGAffineTransformIdentity,
+                                    CGFloat(self.scaleFactor2DForeground), CGFloat(self.scaleFactor2DForeground)),
+                                0.0, containerView.bounds.size.height)
+                    })
+                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 1.0,
+                        animations: {
+                            toView.tintAdjustmentMode = .Automatic
+                            toView.transform = CGAffineTransformIdentity
+                    })
                 }, completion: { (finished: Bool) in
                     transitionContext.completeTransition(finished)
             })
         } else {
-            toView.frame = transitionContext.finalFrameForViewController(fromViewController)
+            toView.frame = transitionContext.finalFrameForViewController(toViewController)
             containerView.insertSubview(toView, belowSubview:fromView)
         }
     }
-    
-    //    public func animationEnded(transitionCompleted: Bool) {
-    //
-    //    }
     
     
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {

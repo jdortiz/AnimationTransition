@@ -13,8 +13,6 @@ import UIKit
 
 public class PresenterAnimator3DTransform: NSObject {
     let forward: Bool
-    let scaleFactor2DBackground = 0.8
-    let scaleFactor2DForeground = 0.9
     let π = M_PI
     
     public init(forward: Bool) {
@@ -45,41 +43,36 @@ extension PresenterAnimator3DTransform: UIViewControllerAnimatedTransitioning {
         toView.frame = endFrame
         
         if transitionContext.isAnimated() {
-            let relativeDurationFirstPart = 0.4
-            let relativeDurationSecondPart = 1.0 - relativeDurationFirstPart
+            let relativeDurationFirstPart = 1.0
+            let relativeDurationSecondPart = 0.8
 
             var perspectiveTransform = CATransform3DIdentity
             perspectiveTransform.m34 = -1.0 / 300.0
             fromView.layer.transform = perspectiveTransform
+            toView.frame = transitionContext.finalFrameForViewController(toViewController)
+            toView.layer.transform = CATransform3DTranslate(
+                CATransform3DTranslate(
+                    CATransform3DRotate(
+                        perspectiveTransform,
+                        CGFloat(self.π / 4.0), 1.0, 0.0, 0.0),
+                    0.0, 667.0, 0.0),
+                0.0, 0.0, -100.0)
+            containerView.addSubview(toView)
             
-            UIView.animateWithDuration(relativeDurationFirstPart * transitionDuration(transitionContext),
+            UIView.animateKeyframesWithDuration(relativeDurationFirstPart * transitionDuration(transitionContext),
                 delay: 0.0,
-                /*            usingSpringWithDamping: 0.70,
-                initialSpringVelocity: 4.0,*/
-                options: UIViewAnimationOptions(0),
+                options: .CalculationModeCubic,
                 animations: { [unowned self] in
-                    fromView.tintAdjustmentMode = .Dimmed
-                    fromView.layer.transform = CATransform3DTranslate(perspectiveTransform, 0.0, 0.0, -200.0)
-                }, completion: {[unowned self] (finished: Bool) in
-                    toView.frame = transitionContext.finalFrameForViewController(toViewController)
-                    toView.layer.transform = CATransform3DTranslate(
-                        CATransform3DTranslate(
-                            CATransform3DRotate(
-                            perspectiveTransform,
-                                CGFloat(self.π / 4.0), 1.0, 0.0, 0.0),
-                            0.0, 667.0, 0.0),
-                        0.0, 0.0, -100.0)
-                    containerView.addSubview(toView)
-                    UIView.animateWithDuration(relativeDurationSecondPart * self.transitionDuration(transitionContext),
-                        delay: 0.0,
-                        /*                    usingSpringWithDamping: 0.70,
-                        initialSpringVelocity: 4.0,*/
-                        options: UIViewAnimationOptions(0),
-                        animations:{
-                            toView.layer.transform = perspectiveTransform
-                        }, completion: { (finished: Bool) in
-                            transitionContext.completeTransition(true)
+                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: relativeDurationFirstPart, animations: {
+                        fromView.tintAdjustmentMode = .Dimmed
+                        fromView.layer.transform = CATransform3DTranslate(perspectiveTransform, 0.0, 0.0, -200.0)
                     })
+                    UIView.addKeyframeWithRelativeStartTime(0.1, relativeDuration: relativeDurationSecondPart,
+                        animations: {
+                            toView.layer.transform = perspectiveTransform
+                        })
+                }, completion: { (finished: Bool) in
+                    transitionContext.completeTransition(true)
                 })
         } else {
             containerView.addSubview(toView)
@@ -91,51 +84,43 @@ extension PresenterAnimator3DTransform: UIViewControllerAnimatedTransitioning {
         let containerView = transitionContext.containerView()
         let endFrame: CGRect, startFrame: CGRect
         if transitionContext.isAnimated() {
-            let relativeDurationFirstPart = 0.6
-            let relativeDurationSecondPart = 1.0 - relativeDurationFirstPart
+            let relativeDurationFirstPart = 1.0
+            let relativeDurationSecondPart = 0.8
             
             var perspectiveTransform = CATransform3DIdentity
             perspectiveTransform.m34 = -1.0 / 300.0
             fromView.layer.transform = perspectiveTransform
             toView.layer.transform = CATransform3DTranslate(perspectiveTransform, 0.0, 0.0, -200.0)
             containerView.insertSubview(toView, belowSubview:fromView)
-            UIView.animateWithDuration(relativeDurationFirstPart * self.transitionDuration(transitionContext),
+            UIView.animateKeyframesWithDuration(self.transitionDuration(transitionContext),
                 delay: 0.0,
-                /*            usingSpringWithDamping: 0.70,
-                initialSpringVelocity: 4.0,*/
-                options: UIViewAnimationOptions(0),
+                options: .CalculationModeCubic,
                 animations: { [unowned self] in
-                    fromView.layer.transform = CATransform3DTranslate(
-                        CATransform3DTranslate(
-                            CATransform3DRotate(
-                                perspectiveTransform,
-                                CGFloat(self.π / 4.0), 1.0, 0.0, 0.0),
-                            0.0, 667.0, 0.0),
-                        0.0, 0.0, -100.0)
-                }, completion: {[unowned self] (finished: Bool) in
-                    UIView.animateWithDuration(relativeDurationSecondPart * self.transitionDuration(transitionContext),
-                        delay: 0.0,
-                        /*                    usingSpringWithDamping: 0.70,
-                        initialSpringVelocity: 4.0,*/
-                        options: UIViewAnimationOptions(0),
-                        animations:{
-                            toViewController.view.tintAdjustmentMode = .Automatic
-                            toView.layer.transform = perspectiveTransform
-                        }, completion: { (finished: Bool) in
-                            transitionContext.completeTransition(finished)
+                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: relativeDurationFirstPart,
+                        animations: {
+                        fromView.layer.transform = CATransform3DTranslate(
+                            CATransform3DTranslate(
+                                CATransform3DRotate(
+                                    perspectiveTransform,
+                                    CGFloat(self.π / 4.0), 1.0, 0.0, 0.0),
+                                0.0, 667.0, 0.0),
+                            0.0, 0.0, -100.0)
                     })
-                })
+                    UIView.addKeyframeWithRelativeStartTime(0.2, relativeDuration: relativeDurationSecondPart,
+                        animations: {
+                        toViewController.view.tintAdjustmentMode = .Automatic
+                        toView.layer.transform = perspectiveTransform
+                    })
+                }, completion: { (finished: Bool) in
+                    transitionContext.completeTransition(finished)
+            })
         } else {
             toView.frame = transitionContext.finalFrameForViewController(fromViewController)
             containerView.insertSubview(toView, belowSubview:fromView)
         }
     }
-    
-    //    public func animationEnded(transitionCompleted: Bool) {
-    //
-    //    }
-    
-    
+
+
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
         return 0.6
     }

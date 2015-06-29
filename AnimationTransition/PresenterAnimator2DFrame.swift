@@ -41,15 +41,13 @@ extension PresenterAnimator2DFrame: UIViewControllerAnimatedTransitioning {
         let endFrame = transitionContext.finalFrameForViewController(toViewController)
 
         if transitionContext.isAnimated() {
-            let screenFrame = UIScreen.mainScreen().bounds
-//            let startFrame = CGRect(x: endFrame.origin.x, y: screenFrame.size.height, width: endFrame.size.width, height: endFrame.size.height)
-            let startFrame = CGRect(x: -screenFrame.size.width, y: screenFrame.size.height, width: endFrame.size.width, height: endFrame.size.height)
+            let startFrame = CGRect(x: -containerView.bounds.size.width, y: containerView.bounds.size.height, width: endFrame.size.width, height: endFrame.size.height)
             toView.frame = startFrame
             containerView.addSubview(toView)
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0.0,
-                usingSpringWithDamping: 0.80,
-                initialSpringVelocity: 0.0,
+/*                usingSpringWithDamping: 0.80,
+                initialSpringVelocity: 0.0,*/
                 options: UIViewAnimationOptions(0),
                 animations:{
                     toView.frame = endFrame
@@ -66,19 +64,18 @@ extension PresenterAnimator2DFrame: UIViewControllerAnimatedTransitioning {
 
     func animateTransitionBackward(transitionContext: UIViewControllerContextTransitioning, fromViewController: UIViewController, toViewController: UIViewController, fromView: UIView, toView: UIView) {
         let containerView = transitionContext.containerView()
+        toView.frame = transitionContext.finalFrameForViewController(fromViewController)
+        containerView.insertSubview(toView, belowSubview:fromView)
         
         if transitionContext.isAnimated() {
-            let endFrame: CGRect, startFrame: CGRect
-            let screenFrame = UIScreen.mainScreen().bounds
-            startFrame = transitionContext.initialFrameForViewController(fromViewController)
-//            endFrame = CGRect(x: startFrame.origin.x, y: screenFrame.size.height, width: startFrame.size.width, height: startFrame.size.height)
-            endFrame = CGRect(x: screenFrame.size.width, y: screenFrame.size.height, width: startFrame.size.width, height: startFrame.size.height)
+            let startFrame = transitionContext.initialFrameForViewController(fromViewController)
+            let endFrame = CGRect(x: containerView.bounds.size.width, y: containerView.bounds.size.height, width: startFrame.size.width, height: startFrame.size.height)
+            toView.tintAdjustmentMode = .Dimmed
             fromViewController.view.frame = startFrame
-            containerView.insertSubview(toView, belowSubview:fromView)
             UIView.animateWithDuration(transitionDuration(transitionContext),
                 delay: 0.0,
-                usingSpringWithDamping: 0.80,
-                initialSpringVelocity: 0.0,
+/*                usingSpringWithDamping: 0.80,
+                initialSpringVelocity: 0.0,*/
                 options: UIViewAnimationOptions(0),
                 animations:{
                     toView.tintAdjustmentMode = .Automatic
@@ -86,14 +83,11 @@ extension PresenterAnimator2DFrame: UIViewControllerAnimatedTransitioning {
                 }, completion: { (finished: Bool) in
                     transitionContext.completeTransition(finished)
             })
-        } else {
-            toView.frame = transitionContext.finalFrameForViewController(fromViewController)
-            containerView.insertSubview(toView, belowSubview:fromView)
         }
     }
     
     
     public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 1.0
+        return 0.4
     }
 }
