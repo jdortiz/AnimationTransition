@@ -83,9 +83,11 @@ extension PresenterAnimator2DTransform: UIViewControllerAnimatedTransitioning {
         
         if transitionContext.isAnimated() {
             toView.tintAdjustmentMode = .Dimmed
+            toView.transform = CGAffineTransformIdentity
+            toView.frame = transitionContext.finalFrameForViewController(toViewController)
+            containerView.insertSubview(toView, belowSubview:fromView)
             toView.transform = CGAffineTransformScale(CGAffineTransformIdentity,
                 CGFloat(scaleFactor2DBackground), CGFloat(scaleFactor2DBackground))
-            containerView.insertSubview(toView, belowSubview:fromView)
             UIView.animateKeyframesWithDuration(transitionDuration(transitionContext),
                 delay: 0.0,
                 options: .CalculationModeCubic,
